@@ -40,5 +40,9 @@
             form.confirmP.$setUntouched();
         };
 
+        $scope.signUp = function(form) {
+            $scope.reset(form);
+        };
+
     }]);
 })();

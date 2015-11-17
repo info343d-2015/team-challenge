@@ -14,12 +14,16 @@
 </head>
 <body ng-controller="AppCtrl">
 
+    <div class="alert alert-success" ng-show="alert">
+        Thanks for signing up!
+    </div>
+
     <form role="form" class="form-controller" name="signupForm" novalidate>
-        <div class="form-group" ng-class="{ 'has-error' : signupForm.email.$invalid && !signupForm.email.$pristine }">
+        <div class="form-group" ng-class="{ 'has-error' : signupForm.email.$invalid && signupForm.email.$touched }">
         	<label>Email</label>
-            <input type="email" id="email" name="email" class="form-control" ng-model="email">
-            <p ng-show="signupForm.email.$invalid && !signupForm.email.$pristine" class="help-block">Enter a valid email.</p>
-            <p ng-show="signupForm.email.$touched" class="help-block">Please enter your email</p>
+            <input type="email" id="email" name="email" class="form-control" required ng-model="email" required>
+            <p ng-show="signupForm.email.$error.email && signupForm.email.$touched" class="help-block">Enter a valid email.</p>
+            <p ng-show="signupForm.email.$touched && signupForm.email.$error.required" class="help-block">Please enter your email</p>
         </div>
         <div class="form-group">
             <label>First Name</label>
@@ -48,7 +52,7 @@
         </div>
         <div class="form-group">
             <button class="btn bn-default" ng-click="reset(signupForm); signupForm.$setPristine()">Reset</button>
-            <button class="btn btn-primary" id="signup" ng-disabled="signupForm.$invalid">Sign Me Up!</button>
+            <button class="btn btn-primary" id="signup" ng-disabled="signupForm.$invalid" ng-click="signUp(signupForm); alert=true">Sign Me Up!</button>
     </div>
     </form>
 
