@@ -14,6 +14,10 @@
 </head>
 <body ng-controller="AppCtrl">
 
+    <div class="alert alert-success" ng-show="alert">
+        Thanks for signing up!
+    </div>
+
     <form role="form" class="form-controller" name="signupForm" novalidate>
         <div class="form-group" ng-class="{ 'has-error' : signupForm.email.$invalid && signupForm.email.$touched }">
         	<label>Email</label>
@@ -48,7 +52,7 @@
         </div>
         <div class="form-group">
             <button class="btn bn-default" ng-click="reset(signupForm); signupForm.$setPristine()">Reset</button>
-            <button class="btn btn-primary" id="signup" ng-disabled="signupForm.$invalid">Sign Me Up!</button>
+            <button class="btn btn-primary" id="signup" ng-disabled="signupForm.$invalid" ng-click="signUp(signupForm); alert=true">Sign Me Up!</button>
     </div>
     </form>
 
