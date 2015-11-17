@@ -29,9 +29,11 @@
             <input type="text" id="lastname" name="lastname" class="form-control" required ng-model="lastname">
             <p ng-show="signupForm.lastname.$touched" class="help-block">we need to know your last name</p>
         </div>
-         <div class="form-group">
+         <div class="form-group" ng-class="{'has-error':signupForm.birthday.$invalid && signupForm.birthday.$touched}">
             <label>Birthday</label>
-            <input type="text" id="birthday" name="birthday">
+            <input type="text" id="birthday" name="birthday" class="form-control" ng-model="birthday" ng-change="checkBirthDate(signupForm)" required />
+             <p ng-if="(signupForm.birthday.$error.required || signupForm.birthday.$error.date) && signupForm.birthday.$touched" class="help-block small">Must be a valid date</p>
+             <p ng-if="signupForm.birthday.$error.age && signupForm.birthday.$touched" class="help-block small">Must be 13 years old</p>
         </div>
         <div class="form-group" ng-class="{'has-error':signupForm.password.$invalid && signupForm.password.$touched}">
             <label for="password">Password</label>
