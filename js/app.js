@@ -15,7 +15,6 @@
             var ageDate = new Date();
             ageDate.setFullYear(ageDate.getFullYear() - 13);
             var date = new Date(Date.parse($scope.birthday.toString()));
-            console.log(date.getFullYear());
             if(!isNaN(date)) {
                 input.$setValidity('date', true);
                 if(date.getTime() < ageDate.getTime()) {
@@ -26,6 +25,19 @@
             } else {
                 input.$setValidity('date', false);
             }
+        };
+
+        $scope.reset = function(form) {
+            $scope.email = '';
+            $scope.firstname = '';
+            $scope.lastname = '';
+            $scope.birthday = '';
+            $scope.pass = '';
+            $scope.confirm = '';
+            form.lastname.$setUntouched();
+            form.birthday.$setUntouched();
+            form.password.$setUntouched();
+            form.confirmP.$setUntouched();
         };
 
     }]);

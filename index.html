@@ -47,7 +47,7 @@
             <p id="match-alert" ng-show="signupForm.confirmP.$invalid && signupForm.confirmP.$touched" class="help-block small">Passwords must match</p>
         </div>
         <div class="form-group">
-            <button class="btn bn-default">Reset</button>
+            <button class="btn bn-default" ng-click="reset(signupForm); signupForm.$setPristine()">Reset</button>
             <button class="btn btn-primary" id="signup" ng-disabled="signupForm.$invalid">Sign Me Up!</button>
     </div>
     </form>
