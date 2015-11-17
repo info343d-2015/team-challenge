@@ -33,8 +33,8 @@
          <div class="form-group" ng-class="{'has-error':signupForm.birthday.$invalid && signupForm.birthday.$touched}">
             <label>Birthday</label>
             <input type="text" id="birthday" name="birthday" class="form-control" ng-model="birthday" ng-change="checkBirthDate(signupForm)" required />
-             <p ng-if="(signupForm.birthday.$error.required || signupForm.birthday.$error.date) && signupForm.birthday.$touched" class="help-block small">Must be a valid date</p>
-             <p ng-if="signupForm.birthday.$error.age && signupForm.birthday.$touched" class="help-block small">Must be 13 years old</p>
+             <p ng-show="(signupForm.birthday.$error.required || signupForm.birthday.$error.date) && signupForm.birthday.$touched" id="birthday-invalidDate" class="help-block small">Must be a valid date</p>
+             <p ng-show="signupForm.birthday.$error.age && signupForm.birthday.$touched" id="birthday-invalidAge" class="help-block small">Must be 13 years old</p>
         </div>
         <div class="form-group" ng-class="{'has-error':signupForm.password.$invalid && signupForm.password.$touched}">
             <label for="password">Password</label>

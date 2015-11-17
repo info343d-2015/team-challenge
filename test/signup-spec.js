@@ -3,13 +3,35 @@ var url = 'http://localhost:8000/index.html';
 var btn = element(by.id('signup'));
 describe('Birthday Field', function() {
     var input = element(by.id('birthday'));
+    var firstName = element(by.id('first-name'));
+    var dateError = element(by.id('birthday-invalidDate'));
+    var ageError = element(by.id('birthday-invalidAge'));
     beforeEach(function() {
         browser.get(url);
     });
     it('should reject non-dates', function() {
         input.sendKeys('foobar');
+        firstName.sendKeys('');
+        expect(input.getAttribute('class')).toContain('ng-invalid');
+        expect(dateError.isDisplayed()).toEqual(true);
+        expect(ageError.isDisplayed()).toEqual(false);
         expect(btn.isEnabled()).toEqual(false);
     });
+    it('should reject under 13', function() {
+        input.sendKeys('11/16/2015');
+        firstName.sendKeys('');
+        expect(input.getAttribute('class')).toContain('ng-invalid');
+        expect(dateError.isDisplayed()).toEqual(false);
+        expect(ageError.isDisplayed()).toEqual(true);
+        expect(btn.isEnabled()).toEqual(false);
+    })
+    it('should accept a valid date', function() {
+        input.sendKeys('11/16/2001');
+        firstName.sendKeys('');
+        expect(input.getAttribute('class')).toContain('ng-valid');
+        expect(dateError.isDisplayed()).toEqual(false);
+        expect(ageError.isDisplayed()).toEqual(false);
+    })
 });
 
 describe('Last name Field', function() {
@@ -57,4 +79,4 @@ describe('Last name Field', function() {
 
         expect(lastname_field.getAttribute("class")).toContain('ng-invalid');
     });
-})
+});
