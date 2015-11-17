@@ -80,3 +80,40 @@ describe('Last name Field', function() {
         expect(lastname_field.getAttribute("class")).toContain('ng-invalid');
     });
 });
+
+describe('Password Fields', function() {
+    var pass1 = element(by.id('password'));
+    var pass2 = element(by.id('confirmP'));
+
+    var matchAlert = element(by.id('match-alert'));
+    var reqAlert = element(by.id('required-alert'));
+    var changeFocus = element(by.id('first-name'));
+
+    it('should be required', function() {
+        pass1.sendKeys('');
+        changeFocus.sendKeys('');
+
+        expect(reqAlert.isDisplayed()).toEqual(true);
+        expect(matchAlert.isDisplayed()).toEqual(false);
+
+    })
+
+    it('should match', function() {
+
+        pass1.sendKeys('test');
+        pass2.sendKeys('test');
+        changeFocus.sendKeys('');
+
+        expect(matchAlert.isDisplayed()).toEqual(false);
+        expect(reqAlert.isDisplayed()).toEqual(false);
+    })
+
+    it('should display an error if it does not match', function() {
+        pass1.sendKeys('test');
+        pass2.sendKeys('not test');
+        changeFocus.sendKeys('');
+
+        expect(matchAlert.isDisplayed()).toEqual(true);
+        expect(reqAlert.isDisplayed()).toEqual(false);
+    })
+});
