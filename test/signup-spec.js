@@ -85,6 +85,10 @@ describe('Password Fields', function() {
     var reqAlert = element(by.id('required-alert'));
     var changeFocus = element(by.id('first-name'));
 
+    beforeEach(function() {
+        browser.get(url);
+    });
+
     it('should be required', function() {
         pass1.sendKeys('');
         changeFocus.sendKeys('');
@@ -114,6 +118,77 @@ describe('Password Fields', function() {
     })
 });
 
+describe('Submit buttons', function() {
+
+    var email = element(by.id('email'));
+    var first = element(by.id('first-name'));
+    var last = element(by.id('lastname'));
+    var birth = element(by.id('birthday'));
+    var pass = element(by.id('password'));
+    var confirm = element(by.id('confirmP'));
+
+    beforeEach(function () {
+        browser.get(url);
+        email.sendKeys('abc1@gmail.com');
+        expect(submit.isEnabled()).toEqual(false);
+        first.sendKeys('john');
+        expect(submit.isEnabled()).toEqual(false);
+        last.sendKeys('smith');
+        expect(submit.isEnabled()).toEqual(false);
+        birth.sendKeys('12/12/2000');
+        expect(submit.isEnabled()).toEqual(false);
+        pass.sendKeys('password');
+        expect(submit.isEnabled()).toEqual(false);
+        confirm.sendKeys('password');
+    });
+
+
+    var submit = element(by.id('signup'));
+    var reset = element(by.id('reset'));
+
+    it('should display a confirmation message when clicked', function() {
+
+        var message = element(by.id("success-alert"));
+
+        expect(message.isDisplayed()).toEqual(false);
+
+        submit.click();
+
+        expect(message.isDisplayed()).toEqual(true);
+
+    })
+
+    it('button should clear all inputs when clicked', function() {
+
+       submit.click();
+
+       expect(email.getText()).toEqual("");
+       expect(first.getText()).toEqual("");
+       expect(last.getText()).toEqual("");
+       expect(birth.getText()).toEqual("");
+       expect(pass.getText()).toEqual("");
+       expect(confirm.getText()).toEqual("");
+
+    })
+
+    it('reset button should reset form', function() {
+
+        reset.click();
+
+       expect(email.getText()).toEqual("");
+       expect(first.getText()).toEqual("");
+       expect(last.getText()).toEqual("");
+       expect(birth.getText()).toEqual("");
+       expect(pass.getText()).toEqual("");
+       expect(confirm.getText()).toEqual("");        
+    })
+
+    it('should be disabled until form is valid', function() {
+
+        expect(submit.isEnabled()).toEqual(true);
+    })
+
+});
 describe('Email', function(){
 	var input = element(by.model('email'));
 	var firstname = element(by.model('firstname'));
