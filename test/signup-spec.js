@@ -113,3 +113,37 @@ describe('Password Fields', function() {
         expect(reqAlert.isDisplayed()).toEqual(false);
     })
 });
+
+describe('Email', function(){
+	var input = element(by.model('email'));
+	var firstname = element(by.model('firstname'));
+	var message1 = element(by.id('emailblankmessage'));
+	var message2 = element(by.id('emailerrormessage'));
+
+	beforeEach(function() {
+	        browser.get(url);
+	    });
+	it('should reject blank', function(){
+		input.sendKeys('');
+		firstname.sendKeys('');
+		expect( message1.isDisplayed()).toEqual(true);
+		expect( message2.isDisplayed()).toEqual(false);
+		expect(input.getAttribute('class')).toContain("ng-invalid");
+	});
+	it('should reject invalid', function(){
+		var input = element(by.model('email'));
+		input.sendKeys('invalidstuff');
+		firstname.sendKeys('');
+		expect( message2.isDisplayed()).toEqual(true);
+		expect( message1.isDisplayed()).toEqual(false);
+		expect(input.getAttribute('class')).toContain("ng-invalid");
+	});
+	it('hide error messages', function(){
+		var input = element(by.model('email'));
+		input.sendKeys('something@right.com'); 
+		firstname.sendKeys('');
+		expect( message1.isDisplayed()).toEqual(false);
+		expect( message2.isDisplayed()).toEqual(false);
+		expect(input.getAttribute('class')).toContain("ng-valid");
+	});
+});

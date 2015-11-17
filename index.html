@@ -22,8 +22,8 @@
         <div class="form-group" ng-class="{ 'has-error' : signupForm.email.$invalid && signupForm.email.$touched }">
         	<label>Email</label>
             <input type="email" id="email" name="email" class="form-control" required ng-model="email" required>
-            <p ng-show="signupForm.email.$error.email && signupForm.email.$touched" class="help-block">Enter a valid email.</p>
-            <p ng-show="signupForm.email.$touched && signupForm.email.$error.required" class="help-block">Please enter your email</p>
+            <p id = "emailerrormessage"ng-show="signupForm.email.$error.email && signupForm.email.$touched" class="help-block">Enter a valid email.</p>
+            <p id="emailblankmessage"ng-show="signupForm.email.$touched && signupForm.email.$error.required" class="help-block">Please enter your email</p>
         </div>
         <div class="form-group">
             <label>First Name</label>
