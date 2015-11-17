@@ -65,8 +65,6 @@ describe('Last name Field', function() {
     it('should not be highlighted when the input is valid', function() {
         lastname_field.sendKeys('Haugh');
 
-        console.log(lastname_field.classList);
-
         expect(lastname_field.getAttribute("class")).toContain('ng-valid');
     });
 
@@ -74,8 +72,6 @@ describe('Last name Field', function() {
         lastname_field.sendKeys('');
 
         firstname_field.sendKeys('Ali');
-
-        console.log(lastname_field.classList);
 
         expect(lastname_field.getAttribute("class")).toContain('ng-invalid');
     });
